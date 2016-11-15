@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+  
+		<!-- Phonecalls Search View  -->
+		<record id="winyoo_view_crm_case_phonecalls_filter" model="ir.ui.view">
+			<field name="name">CRM - Phone Calls Search Plus</field>
+			<field name="model">crm.phonecall</field>
+			<field name="inherit_id" ref="crm.view_crm_case_phonecalls_filter"/>
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="product_id"/>
+				</field>
+				<filter name="current" position = "replace">
+					<attribute name="invisible">True</attribute>
+				</filter>
+				<filter name="message_unread" position = "attributes">
+					<attribute name="invisible">True</attribute>
+				</filter>
+				<filter string="Month" position="after">
+					<filter string ="Product" domain="[]" context="{'group_by':'product_id'}"/>
+				</filter>
+			</field>
+		</record>
+    	
+   		<!-- Logged Phonecalls Tree View -->
+    	<record model="ir.ui.view" id="sup_crm_case_inbound_phone_tree_view">
+	        <field name="name">sup.crm.case.inbound.phone.tree.view</field>
+    	    <field name="model">crm.phonecall</field>
+    	    <field name="inherit_id" ref="crm.crm_case_inbound_phone_tree_view"/>
+        	<field name="arch" type="xml">
+				<tree position="attributes">
+                    <attribute name="default_order">date desc</attribute>
+				</tree>
+
+               	<field name="categ_id" position="replace"></field>
+				
+               	<field name="date" position="after">
+               	    <field name="categ_id" widget="selection" required="True"
+                    	domain="[('object_id.model', '=', 'crm.phonecall')]"
+                    	invisible="0"/>
+					<!--<field name="product_ids" widget="many2many_tags"/>-->
+					<field name="product_id"/>
+                </field>
+                <field name="name" position="after">
+               		<field name="description" placeholder="รายละเอียด"/>
+               	</field>
+
+				<button name="340" position="attributes">
+						<attribute name="invisible">True</attribute>
+				</button>
+				<button name="action_make_meeting" position="attributes">
+						<attribute name="invisible">True</attribute>
+				</button>
+				<button name="action_button_convert2opportunity" position="attributes">
+						<attribute name="invisible">True</attribute>
+				</button>
+
+			</field>
+		</record>
+
+   		<!-- Logged Phonecalls Form View -->
+    	<record model="ir.ui.view" id="sup_crm_case_phone_form_view">
+	        <field name="name">sup.crm.case.phone.form.view</field>
+    	    <field name="model">crm.phonecall</field>
+    	    <field name="inherit_id" ref="crm.crm_case_phone_form_view"/>
+        	<field name="arch" type="xml">
+               	<!--<label name="categ_id" position="attributes">-->
+					<!--<attribute name="invisible">True</attribute>-->
+				<!--</label>-->
+               	<!--<field name="categ_id" position="attributes">-->
+					<!--<attribute name="invisible">True</attribute>-->
+				<!--</field>-->
+
+
+             	<field name="partner_mobile" position="attributes">
+             		<attribute name="invisible">True</attribute>
+             	</field>
+             	<field name="opportunity_id" position="attributes">
+             		<attribute name="invisible">True</attribute>
+             	</field>
+             	<field name="categ_id" position="after">
+					<field name="product_id"/>
+					<!--<field name="product_ids" widget="many2many_tags"/>-->
+             	</field>
+
+
+        	</field>
+    	</record>
+    	
+    	
+    </data>
+
+</openerp>
