@@ -22,26 +22,36 @@
 # from filename import classname # in my folder
 # from ubuntu_library import classname or filename # in ubuntu
 # from module import filename or classname #in odoo
-
+    
 from openerp import models, fields, api #import file "model.py", "fields.py", "api.py"  from folder openerp
-from openerp.tools.float_utils import float_round
-from datetime import timedelta
-from datetime import datetime
-from openerp.exceptions import ValidationError
 from dateutil.relativedelta import relativedelta
+from datetime import datetime
+from docutils.parsers import null
+from openerp.exceptions import ValidationError
 
-class product_template(models.Model):
-    _inherit = 'product.template'
+class res_partner(models.Model):
+    _inherit = 'res.partner'
 
-    # @api.one
-    # def _phonecall_count(self):
-    #     res = {}
-    #     for product_tmp in self:
-    #         res[product_tmp.id] = len(product_tmp.phonecall_ids)
-    #     return res
+    supplier_type = fields.Selection([('00supplier', 'Buying now'), ('01okay', 'Okay, but not buy'), ('02not_choose', 'Still considering'),('03not_okay', 'Not Okay')],
+        string="Supplier Type",
+        help="มีการซื้อขายแล้วหรือไม่")
+    email_print = fields.Char('Email Print')
+
+    # @api.multi
+    # def button_supplier(self):
+    #     return self.write({'supplier_type': 'to_approve'})
     #
-    # phonecall_count = fields.Integer(string='Phonecalls', compute='_phonecall_count')
-
+    # @api.multi
+    # def button_okay(self):
+    #     return self.write({'supplier_type': 'not_approve'})
+    #
+    # @api.multi
+    # def button_not_choose(self):
+    #     return self.write({'supplier_type': 'approved'})
+    #
+    # @api.multi
+    # def button_not_okay(self):
+    #     return self.write({'supplier_type': 'delete_requested'})
 
 
 

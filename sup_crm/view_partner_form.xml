@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!--  แก้ Customer menu ให้ไ้น tree ก่อน-->
+       <record model="ir.actions.act_window" id="base.action_partner_form">
+           <field name="name">Supplier Okay</field>
+           <field name="res_model">res.partner</field>
+           <field name="context">{'search_default_type_company': 1}</field>
+           <field name="domain">[('customer','=',1),('supplier_type','!=','03not_okay')]</field>
+           <field name="limit">80</field>
+           <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem id="base.menu_partner_form" name="Supplier Okay"
+                  action="base.action_partner_form"
+        	parent="base.menu_sales"
+            sequence="0"/>
+
+        <record id="action_supplier_cus" model="ir.actions.act_window">
+            <field name="name">Supplier Not Okay</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'search_default_type_company': 1}</field>
+            <field name="domain">[('supplier_type','=','03not_okay')]</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <!--<field name="search_view_id" ref="view_search_draft_po"/>-->
+        </record>
+       	<menuitem id="menu_supplier_not_okay" name="Supplier Not Okay"
+       		action="action_supplier_cus"
+        	parent="base.menu_sales"
+            sequence="1"/>
+
+
+ 		<record id="sup_crm_view_partner_form" model="ir.ui.view">
+            <field name="name">sup_crm.view.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <field name="website" position="after">
+                    <field name="supplier_type"/>
+                </field>
+				<field name="email" position="replace">
+	        		<field name="email_print" />
+				</field>
+
+				<!--   ++++++   CONTACT CHILD_IDS  ++++++   -->
+             	<xpath expr="//notebook/page/field/form[@string='Contact']/sheet//field[@name='mobile']" position="after">
+             	    <field name="supplier_type"/>
+                </xpath>
+                <xpath expr="//notebook/page/field/form[@string='Contact']/sheet//field[@name='email']" position="replace">
+             	    <field name="email_print"/>
+                </xpath>
+
+
+
+		    </field>
+		</record>
+
+        <record id="sup_crm_view_partner_tree" model="ir.ui.view">
+            <field name="name">sup_crm.view.partner.tree</field>
+            <field name="model">res.partner</field>
+	      	<field name="inherit_id" ref="base.view_partner_tree"/>            
+            <field name="arch" type="xml">
+                <tree string="Contacts" position="attributes">
+                      <attribute name="default_order">supplier_type, name asc</attribute>
+                </tree>
+	        	<field name="display_name" position="after">
+	        		<field name="supplier_type" />
+                    <field name="country_id"/>
+	        	</field>
+	        	<field name="email" position="replace">
+	        		<field name="email_print" />
+	        	</field>                    
+            </field>
+        </record>
+  
+ 
+    </data>
+</openerp>
+

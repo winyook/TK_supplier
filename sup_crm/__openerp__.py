@@ -35,6 +35,7 @@ Winyoo create 2016
              #'data/crm.case.categ.csv',
              'crm_case_phone_form_view.xml',
             'product_view.xml',
+            'view_partner_form.xml',
              ], #XML File that included in my module
              
     'demo': [

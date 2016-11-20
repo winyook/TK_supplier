@@ -1,8 +1,8 @@
 #-*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2010 Tinnakorn Group 
+#    Copyright (C) 2004-2010 Tinnakorn Group
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -15,14 +15,13 @@
 #    GNU Affero General Public License for more details.
 #
 #    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 import crm_phonecall
 import product
-#import sale_report
-#from odoo-tkc.openerp.addons.crm import crm
+import res_partner
 
 
 
