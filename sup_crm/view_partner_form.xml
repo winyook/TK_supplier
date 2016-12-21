@@ -5,7 +5,7 @@
        <record model="ir.actions.act_window" id="base.action_partner_form">
            <field name="name">Supplier Okay</field>
            <field name="res_model">res.partner</field>
-           <field name="context">{'search_default_type_company': 1}</field>
+           <field name="context">{'search_default_type_company': 1,'default_supplier_type': '02not_choose'}</field>
            <field name="domain">[('customer','=',1),('supplier_type','!=','03not_okay')]</field>
            <field name="limit">80</field>
            <field name="view_mode">tree,form,kanban</field>
@@ -20,7 +20,7 @@
             <field name="name">Supplier Not Okay</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
-            <field name="context">{'search_default_type_company': 1}</field>
+            <field name="context">{'search_default_type_company': 1,'default_supplier_type': '02not_choose'}</field>
             <field name="domain">[('supplier_type','=','03not_okay')]</field>
             <field name="view_mode">tree,form,kanban</field>
             <!--<field name="search_view_id" ref="view_search_draft_po"/>-->
